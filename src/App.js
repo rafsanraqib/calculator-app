@@ -2,11 +2,13 @@ import React, { Component } from "react";
 import Text from "./Components/Text";
 import Button from "./Components/Buttons";
 
+// This class loads all the components and handles all the calculations
 class App extends Component {
   state = {
     textVal: "",
     leftValue: "",
-    rightValue: ""
+    rightValue: "",
+    sign: ""
   };
 
   handleClick = val => {
@@ -17,10 +19,48 @@ class App extends Component {
     } else if (val === "+") {
       let textVal = this.state.textVal;
       textVal += "+";
+      let sign = this.state.sign;
+      sign = val;
+      this.setState({ sign });
+      this.setState({ textVal });
+    } else if (val === "-") {
+      let textVal = this.state.textVal;
+      textVal += "-";
+      let sign = this.state.sign;
+      sign = val;
+      this.setState({ sign });
+      this.setState({ textVal });
+    } else if (val === "*") {
+      let textVal = this.state.textVal;
+      textVal += "*";
+      let sign = this.state.sign;
+      sign = val;
+      this.setState({ sign });
+      this.setState({ textVal });
+    } else if (val === "/") {
+      let textVal = this.state.textVal;
+      textVal += "/";
+      let sign = this.state.sign;
+      sign = val;
+      this.setState({ sign });
+      this.setState({ textVal });
+    } else if (val === "Delete") {
+      let len = this.state.textVal.length - 1;
+      let textVal = this.state.textVal;
+      textVal = this.state.textVal.substring(len, 0);
       this.setState({ textVal });
     } else if (val === "=") {
-      const res = this.state.textVal.split(/[+-,]/);
-      let result = parseInt(res[0], 10) + parseInt(res[1], 10);
+      const res = this.state.textVal.split(/[*+/-]/);
+      let result = 0;
+      if (this.state.sign === "+") {
+        result = parseInt(res[0], 10) + parseInt(res[1], 10);
+      } else if (this.state.sign === "-") {
+        result = parseInt(res[0], 10) - parseInt(res[1], 10);
+      } else if (this.state.sign === "/") {
+        result = parseInt(res[0], 10) / parseInt(res[1], 10);
+      } else {
+        result = parseInt(res[0], 10) * parseInt(res[1], 10);
+      }
       result = result.toString();
       this.setState({ textVal: result });
     } else {

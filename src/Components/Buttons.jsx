@@ -1,5 +1,6 @@
 import React from "react";
 
+// This function returns the button component of the calculator
 const Button = props => {
   return (
     <input

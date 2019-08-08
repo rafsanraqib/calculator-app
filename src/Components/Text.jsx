@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 
+// This class has the design for the screen of the calculator
 class Button extends Component {
   render() {
     return (
